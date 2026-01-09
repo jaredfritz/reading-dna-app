@@ -1,0 +1,124 @@
+.recommendations-container {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.recommendations-container h2 {
+  color: #333;
+  margin-top: 0;
+  text-align: center;
+}
+
+.subtitle {
+  text-align: center;
+  color: #666;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.diversity-note {
+  background-color: #f0f7ff;
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 4px solid #667eea;
+  color: #555;
+  margin: 1rem 0;
+}
+
+.recommendations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.recommendation-card {
+  background-color: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border-left: 4px solid #667eea;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.recommendation-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+  gap: 1rem;
+}
+
+.card-header h3 {
+  color: #333;
+  margin: 0;
+  font-size: 1.2rem;
+  flex: 1;
+}
+
+.genre-badge {
+  background-color: #667eea;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.recommendation-card .author {
+  color: #666;
+  font-style: italic;
+  margin: 0.25rem 0;
+}
+
+.recommendation-card .hook {
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 1rem 0;
+}
+
+.recommendation-card .reason {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.recommendation-card .reason strong {
+  color: #667eea;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.recommendation-card .reason p {
+  color: #666;
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.generate-button,
+.regenerate-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  display: block;
+  margin: 2rem auto;
+}
+
+.generate-button:hover,
+.regenerate-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
