@@ -1,7 +1,7 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
-const { generateReadingDNA, generateBookConnections } = require('../services/openaiService');
+const { generateReadingDNA, generateBookConnections } = require('../services/aiService');
 
 const router = express.Router();
 

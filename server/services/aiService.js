@@ -1,7 +1,7 @@
-const OpenAI = require('openai');
+const Anthropic = require('@anthropic-ai/sdk');
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+const anthropic = new Anthropic({
+  apiKey: process.env.ANTHROPIC_API_KEY,
 });
 
 /**
@@ -43,14 +43,18 @@ Format as JSON with this structure:
 }`;
 
   try {
-    const response = await openai.chat.completions.create({
-      model: 'gpt-4',
-      messages: [{ role: 'user', content: prompt }],
+    const response = await anthropic.messages.create({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 4096,
       temperature: 0.7,
-      response_format: { type: "json_object" }
+      messages: [{
+        role: 'user',
+        content: prompt + '\n\nRespond with valid JSON only, no other text.'
+      }]
     });
 
-    return JSON.parse(response.choices[0].message.content);
+    const jsonText = response.content[0].text;
+    return JSON.parse(jsonText);
   } catch (error) {
     console.error('Error generating Reading DNA:', error);
     throw new Error('Failed to generate Reading DNA profile');
@@ -100,14 +104,18 @@ Format as JSON array:
 }]`;
 
   try {
-    const response = await openai.chat.completions.create({
-      model: 'gpt-4',
-      messages: [{ role: 'user', content: prompt }],
+    const response = await anthropic.messages.create({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 4096,
       temperature: 0.8,
-      response_format: { type: "json_object" }
+      messages: [{
+        role: 'user',
+        content: prompt + '\n\nRespond with valid JSON only, no other text.'
+      }]
     });
 
-    const result = JSON.parse(response.choices[0].message.content);
+    const jsonText = response.content[0].text;
+    const result = JSON.parse(jsonText);
     return result.recommendations || result;
   } catch (error) {
     console.error('Error generating recommendations:', error);
@@ -143,14 +151,18 @@ Format as JSON:
 }`;
 
   try {
-    const response = await openai.chat.completions.create({
-      model: 'gpt-4',
-      messages: [{ role: 'user', content: prompt }],
+    const response = await anthropic.messages.create({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 4096,
       temperature: 0.7,
-      response_format: { type: "json_object" }
+      messages: [{
+        role: 'user',
+        content: prompt + '\n\nRespond with valid JSON only, no other text.'
+      }]
     });
 
-    return JSON.parse(response.choices[0].message.content);
+    const jsonText = response.content[0].text;
+    return JSON.parse(jsonText);
   } catch (error) {
     console.error('Error evaluating book:', error);
     throw new Error('Failed to evaluate book');
@@ -192,14 +204,18 @@ Format as JSON:
 }`;
 
   try {
-    const response = await openai.chat.completions.create({
-      model: 'gpt-4',
-      messages: [{ role: 'user', content: prompt }],
+    const response = await anthropic.messages.create({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 4096,
       temperature: 0.6,
-      response_format: { type: "json_object" }
+      messages: [{
+        role: 'user',
+        content: prompt + '\n\nRespond with valid JSON only, no other text.'
+      }]
     });
 
-    return JSON.parse(response.choices[0].message.content);
+    const jsonText = response.content[0].text;
+    return JSON.parse(jsonText);
   } catch (error) {
     console.error('Error generating book connections:', error);
     throw new Error('Failed to generate book connections');

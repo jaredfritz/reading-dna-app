@@ -1,7 +1,7 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
-const { evaluateBook } = require('../services/openaiService');
+const { evaluateBook } = require('../services/aiService');
 
 const router = express.Router();
 

@@ -2,13 +2,13 @@
 
 Follow these steps to get your Reading DNA app up and running.
 
-## Step 1: Get Your OpenAI API Key
+## Step 1: Get Your Anthropic API Key
 
-1. Go to [https://platform.openai.com/api-keys](https://platform.openai.com/api-keys)
-2. Sign in or create an account
-3. Click "Create new secret key"
-4. Copy the key (you won't be able to see it again!)
-5. Make sure you have billing set up and credits available
+1. Go to [https://console.anthropic.com](https://console.anthropic.com)
+2. Sign up for a free account (includes $5 credit - no credit card required!)
+3. Navigate to "API Keys" in the menu
+4. Click "Create Key"
+5. Copy the key (you won't be able to see it again!)
 
 ## Step 2: Configure Environment
 
@@ -17,14 +17,14 @@ Follow these steps to get your Reading DNA app up and running.
 cp .env.example .env
 ```
 
-2. Edit `.env` and paste your OpenAI API key:
+2. Edit `.env` and paste your Anthropic API key:
 ```bash
 nano .env
 ```
 
 Or use any text editor. The file should look like:
 ```
-OPENAI_API_KEY=sk-proj-xxxxxxxxxxxxxxxxxxxxxxxxxxxx
+ANTHROPIC_API_KEY=sk-ant-xxxxxxxxxxxxxxxxxxxxxxxxxxxx
 PORT=5000
 ```
 
@@ -39,7 +39,7 @@ npm run install-all
 ```
 
 This will:
-- Install backend packages (Express, OpenAI, etc.)
+- Install backend packages (Express, Anthropic SDK, etc.)
 - Install frontend packages (React, Recharts, react-force-graph)
 
 ## Step 4: Start the App
@@ -85,11 +85,11 @@ This will:
 
 ### "Failed to generate Reading DNA"
 
-**Problem**: OpenAI API call failed
+**Problem**: Anthropic API call failed
 
 **Solutions**:
 - Check that your API key is correct in `.env`
-- Verify you have credits in your OpenAI account
+- Verify you have credits in your Anthropic account
 - Check the terminal/console for error messages
 
 ### "Port 5000 is already in use"
@@ -166,12 +166,14 @@ Once everything is working:
 
 ## Cost Tracking
 
-Monitor your OpenAI usage at [https://platform.openai.com/usage](https://platform.openai.com/usage)
+Monitor your Anthropic usage at [https://console.anthropic.com](https://console.anthropic.com)
 
 Typical costs per user:
-- Initial analysis (DNA + connections): ~$0.10-0.25
-- Recommendations: ~$0.05-0.10 per generation
-- Book evaluations: ~$0.02-0.05 each
+- Initial analysis (DNA + connections): ~$0.05-0.15
+- Recommendations: ~$0.03-0.06 per generation
+- Book evaluations: ~$0.01-0.03 each
+
+**Remember**: New accounts get $5 free credit, which covers ~20-50 full analyses!
 
 ---
 

@@ -41,14 +41,14 @@ Considering a new book? Get intelligent feedback:
 
 - **Frontend**: React with Recharts (charts) and react-force-graph (network visualization)
 - **Backend**: Node.js with Express
-- **AI**: OpenAI GPT-4 for intelligent analysis
+- **AI**: Anthropic Claude Sonnet 4 for intelligent analysis
 - **Storage**: Local file-based JSON storage (MVP)
 
 ## Prerequisites
 
 - Node.js (v14 or higher)
 - npm (v6 or higher)
-- OpenAI API key
+- Anthropic API key (get $5 free credit!)
 
 ## Installation
 
@@ -81,13 +81,16 @@ Create a `.env` file in the root directory:
 cp .env.example .env
 ```
 
-Edit `.env` and add your OpenAI API key:
+Edit `.env` and add your Anthropic API key:
 ```
-OPENAI_API_KEY=your_actual_openai_api_key_here
+ANTHROPIC_API_KEY=your_actual_anthropic_api_key_here
 PORT=5000
 ```
 
-**Get your OpenAI API key**: Visit [platform.openai.com](https://platform.openai.com/api-keys)
+**Get your Anthropic API key**:
+1. Visit [console.anthropic.com](https://console.anthropic.com)
+2. Sign up for a free account (includes $5 credit!)
+3. Go to API Keys and create a new key
 
 ## Running the App
 
@@ -169,7 +172,7 @@ reading-dna-app/
 │   │   ├── recommendations.js
 │   │   └── evaluation.js
 │   ├── services/
-│   │   └── openaiService.js # OpenAI integration
+│   │   └── aiService.js     # Claude AI integration
 │   └── index.js             # Server entry point
 ├── data/                    # User data storage
 │   └── uploads/             # Temporary file uploads
@@ -203,7 +206,7 @@ reading-dna-app/
 
 ### Environment Variables
 
-- `OPENAI_API_KEY`: Your OpenAI API key (required)
+- `ANTHROPIC_API_KEY`: Your Anthropic API key (required)
 - `PORT`: Backend server port (default: 5000)
 - `REACT_APP_API_URL`: API URL for frontend (default: http://localhost:5000/api)
 
@@ -232,19 +235,21 @@ The server will serve the built React app from the `client/build` directory.
 
 ## Cost Considerations
 
-This app uses OpenAI's GPT-4 API, which has associated costs:
-- Reading DNA generation: ~$0.05-0.15 per analysis
-- Book connections: ~$0.03-0.08 per graph
-- Recommendations: ~$0.05-0.10 per set
-- Book evaluation: ~$0.02-0.05 per book
+This app uses Anthropic's Claude Sonnet 4 API, which is very affordable:
+- Reading DNA generation: ~$0.03-0.08 per analysis
+- Book connections: ~$0.02-0.05 per graph
+- Recommendations: ~$0.03-0.06 per set
+- Book evaluation: ~$0.01-0.03 per book
 
-Typical usage for one user: ~$0.20-0.50
+**Typical usage for one user: ~$0.10-0.25** (cheaper than OpenAI!)
+
+**Free tier**: New accounts get $5 credit, which covers ~20-50 full analyses!
 
 ## Troubleshooting
 
 ### "Failed to generate Reading DNA"
-- Check that your OpenAI API key is valid in `.env`
-- Ensure you have credits in your OpenAI account
+- Check that your Anthropic API key is valid in `.env`
+- Ensure you have credits in your Anthropic account
 - Check backend console for detailed error messages
 
 ### CSV Upload Fails
@@ -290,7 +295,7 @@ MIT License - feel free to use this project as a starting point for your own rea
 Built with:
 - React
 - Node.js & Express
-- OpenAI GPT-4
+- Anthropic Claude Sonnet 4
 - react-force-graph (vasturiano)
 - Recharts
 - Inspiration from Goodreads and StoryGraph

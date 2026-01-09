@@ -49,7 +49,7 @@ A full-stack web application that transforms your reading history into actionabl
 - **Express** - Web framework
 - **Multer** - File upload handling
 - **csv-parser** - CSV processing
-- **OpenAI API** - GPT-4 for intelligent analysis
+- **Anthropic Claude API** - Sonnet 4 for intelligent analysis
 - **dotenv** - Environment configuration
 
 ### Storage
@@ -67,7 +67,7 @@ reading-dna-app/
 │   └── Interactive visualizations
 ├── Backend (Express)
 │   ├── 4 API route groups
-│   ├── OpenAI service integration
+│   ├── Anthropic Claude service integration
 │   └── File processing
 ├── Documentation
 │   ├── README.md (comprehensive)
@@ -87,7 +87,7 @@ reading-dna-app/
 - `server/routes/analysis.js` - DNA & connections
 - `server/routes/recommendations.js` - Book suggestions
 - `server/routes/evaluation.js` - Book evaluation
-- `server/services/openaiService.js` - OpenAI integration
+- `server/services/aiService.js` - Anthropic Claude integration
 - `package.json` - Backend dependencies
 
 ### Frontend (11 files)
@@ -157,7 +157,7 @@ This app combines features not found together elsewhere:
 - No user authentication
 - Single-user per session
 - No data persistence across sessions
-- Requires OpenAI API costs
+- Requires Anthropic Claude API costs
 
 ### Potential Enhancements
 - User authentication system
@@ -179,11 +179,11 @@ This app combines features not found together elsewhere:
 - **API endpoints**: 10
 - **React components**: 5 major components
 - **Development time**: Single session
-- **External APIs**: OpenAI GPT-4
+- **External APIs**: Anthropic Claude Sonnet 4
 
 ## Next Steps for Deployment
 
-1. Get OpenAI API key
+1. Get Anthropic Claude API key
 2. Set up `.env` file
 3. Run `npm run install-all`
 4. Run `npm run dev`
