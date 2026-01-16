@@ -1,9 +1,9 @@
-# Reading DNA App - Quick Start
+# Readr - Quick Start
 
 ## ✅ What's Ready
 
-Your Reading DNA app is now:
-- ✅ **On GitHub**: https://github.com/jaredfritz/reading-dna-app
+Your Readr app is now:
+- ✅ **On GitHub**: https://github.com/jaredfritz/readr
 - ✅ **Rate Limited**: Max 10 API calls/hour, 50/day
 - ✅ **Pre-loaded**: Your wife's 869 books analyzed and ready
 - ✅ **Protected**: .gitignore prevents API key from being committed
@@ -18,14 +18,14 @@ Your Reading DNA app is now:
 ### Step 2: Create Web Service
 1. Click "New +" → "Web Service"
 2. Connect your GitHub account if prompted
-3. Select the `reading-dna-app` repository
+3. Select the `readr` repository
 4. Click "Connect"
 
 ### Step 3: Configure Service
 Fill in these settings:
 
 **Basic Settings:**
-- **Name**: `reading-dna-app` (or any name you want)
+- **Name**: `readr` (or any name you want)
 - **Region**: Choose closest to you
 - **Branch**: `main`
 - **Root Directory**: (leave blank)
@@ -55,12 +55,12 @@ Add these 3 variables:
 | `PORT` | `10000` |
 | `ANTHROPIC_API_KEY` | `your-api-key-from-env-file` |
 
-**Note**: Get your API key from `/Users/jaredfritz/reading-dna-app/.env` file on your local machine.
+**Note**: Get your API key from `/Users/jaredfritz/readr/.env` file on your local machine.
 
 ### Step 5: Deploy
 1. Click "Create Web Service"
 2. Wait 5-10 minutes for build to complete
-3. Your app URL will be shown at the top (e.g., `https://reading-dna-app-xxxx.onrender.com`)
+3. Your app URL will be shown at the top (e.g., `https://readr-xxxx.onrender.com`)
 
 ### Step 6: Configure Frontend
 After deployment completes:
@@ -68,17 +68,17 @@ After deployment completes:
 1. Copy your app's URL from Render dashboard
 2. On your local computer, create this file:
 
-   **File**: `/Users/jaredfritz/reading-dna-app/client/.env.production`
+   **File**: `/Users/jaredfritz/readr/client/.env.production`
 
    **Content**:
    ```
-   REACT_APP_API_URL=https://reading-dna-app-xxxx.onrender.com/api
+   REACT_APP_API_URL=https://readr-xxxx.onrender.com/api
    ```
    Replace `xxxx` with your actual Render URL
 
 3. Commit and push:
    ```bash
-   cd /Users/jaredfritz/reading-dna-app
+   cd /Users/jaredfritz/readr
    git add client/.env.production
    git commit -m "Add production API URL"
    git push
@@ -87,13 +87,13 @@ After deployment completes:
 4. Render will automatically redeploy (2-3 minutes)
 
 ### Step 7: Access Your App
-- Go to your Render URL: `https://reading-dna-app-xxxx.onrender.com`
-- The app will show your wife's Reading DNA immediately!
+- Go to your Render URL: `https://readr-xxxx.onrender.com`
+- The app will show your wife's reading profile immediately!
 
 ## 📊 What Works
 
 **FREE (Instant Loading):**
-- ✅ Reading DNA profile
+- ✅ Reading profile
 - ✅ Book connection graph
 - ✅ All 869 books pre-loaded
 
@@ -132,7 +132,7 @@ Check usage at:
 To update the app:
 
 ```bash
-cd /Users/jaredfritz/reading-dna-app
+cd /Users/jaredfritz/readr
 # Make your changes
 git add .
 git commit -m "Description of changes"

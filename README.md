@@ -1,6 +1,6 @@
-# Reading DNA
+# Readr
 
-A personalized book tracking web app that analyzes your reading history to create a unique "Reading DNA" profile, visualizes connections between books you've read, and provides intelligent recommendations.
+Your reading fingerprint. A personalized book tracking app that analyzes your reading history, visualizes connections between books you've read, and provides intelligent recommendations.
 
 ## Features
 
@@ -9,7 +9,7 @@ A personalized book tracking web app that analyzes your reading history to creat
 - Supports CSV exports from both platforms
 - Automatically parses and normalizes your book data
 
-### 2. Reading DNA Profile
+### 2. Your Reading Profile
 Discover your unique reading fingerprint with AI-powered analysis:
 - **Core Reading Identity**: What defines you as a reader
 - **Genre Distribution**: Visual breakdown of your genre preferences
@@ -24,14 +24,14 @@ Discover your unique reading fingerprint with AI-powered analysis:
 - Click on any book to explore its connections
 
 ### 4. Suggested Reads
-- Get 10 personalized book recommendations based on your Reading DNA
+- Get 9 personalized book recommendations based on your reading profile
 - **Genre diversity built-in**: Recommendations span multiple genres to prevent typecasting
 - Includes both popular and lesser-known titles
 - Each recommendation explains why it fits your taste
 
 ### 5. Book Evaluator
 Considering a new book? Get intelligent feedback:
-- **Match Score**: 1-10 rating of how well it fits your Reading DNA
+- **Match Score**: 1-10 rating of how well it fits your reading profile
 - **Why It Fits**: Specific reasons this book appeals to you
 - **Potential Concerns**: Aspects that might not align with your preferences
 - **Content Warnings**: Spoiler-free trigger warnings
@@ -54,7 +54,7 @@ Considering a new book? Get intelligent feedback:
 
 1. **Clone the repository** (or navigate to the project directory):
 ```bash
-cd reading-dna-app
+cd readr
 ```
 
 2. **Install backend dependencies**:
@@ -138,11 +138,10 @@ npm run client
 3. Choose your CSV file
 4. Click "Upload & Analyze"
 
-### Step 3: Generate Your Reading DNA
-1. Navigate to the "Reading DNA" tab
-2. Click "Generate Reading DNA"
-3. Wait for AI analysis (this may take 1-2 minutes)
-4. Explore your personalized reading profile!
+### Step 3: View Your Reading Profile
+1. Navigate to the "Profile" tab
+2. Your reading profile loads instantly with preloaded data
+3. Explore your personalized reading fingerprint!
 
 ### Step 4: Explore Features
 - **Book Connections**: Generate an interactive graph of your book relationships
@@ -152,7 +151,7 @@ npm run client
 ## Project Structure
 
 ```
-reading-dna-app/
+readr/
 ├── client/                  # React frontend
 │   ├── src/
 │   │   ├── components/      # React components
@@ -190,8 +189,8 @@ reading-dna-app/
 - `GET /api/upload/user/:userId` - Get user's book data
 
 ### Analysis
-- `POST /api/analysis/reading-dna` - Generate Reading DNA
-- `GET /api/analysis/reading-dna/:userId` - Get existing DNA
+- `POST /api/analysis/reading-dna` - Generate reading profile
+- `GET /api/analysis/reading-dna/:userId` - Get existing profile
 - `POST /api/analysis/book-connections` - Generate connection graph
 - `GET /api/analysis/book-connections/:userId` - Get existing connections
 
@@ -236,7 +235,7 @@ The server will serve the built React app from the `client/build` directory.
 ## Cost Considerations
 
 This app uses Anthropic's Claude Sonnet 4 API, which is very affordable:
-- Reading DNA generation: ~$0.03-0.08 per analysis
+- Reading profile generation: ~$0.03-0.08 per analysis
 - Book connections: ~$0.02-0.05 per graph
 - Recommendations: ~$0.03-0.06 per set
 - Book evaluation: ~$0.01-0.03 per book
@@ -247,7 +246,7 @@ This app uses Anthropic's Claude Sonnet 4 API, which is very affordable:
 
 ## Troubleshooting
 
-### "Failed to generate Reading DNA"
+### "Failed to generate profile"
 - Check that your Anthropic API key is valid in `.env`
 - Ensure you have credits in your Anthropic account
 - Check backend console for detailed error messages
@@ -258,7 +257,7 @@ This app uses Anthropic's Claude Sonnet 4 API, which is very affordable:
 - Try re-exporting from the source platform
 
 ### Graph Doesn't Display
-- Ensure you've uploaded books and generated Reading DNA first
+- Ensure you've uploaded books and generated your profile first
 - Check browser console for errors
 - Try regenerating the graph
 
