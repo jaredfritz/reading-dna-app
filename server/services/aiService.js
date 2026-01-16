@@ -53,7 +53,11 @@ Format as JSON with this structure:
       }]
     });
 
-    const jsonText = response.content[0].text;
+    let jsonText = response.content[0].text;
+
+    // Clean up markdown code blocks if present
+    jsonText = jsonText.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
+
     return JSON.parse(jsonText);
   } catch (error) {
     console.error('Error generating Reading DNA:', error);
@@ -69,18 +73,30 @@ async function generateRecommendations(books, readingDNA) {
     book.shelf === 'read' || book['Exclusive Shelf'] === 'read'
   );
 
+  // Get all book titles and authors they've read for exclusion
+  const allReadBooks = readBooks.map(book => ({
+    title: book['Title'] || book.title,
+    author: book['Author'] || book.author,
+  }));
+
+  // Get recent books for context
   const recentBooks = readBooks.slice(0, 30).map(book => ({
     title: book['Title'] || book.title,
     author: book['Author'] || book.author,
   }));
 
-  const prompt = `Based on this reader's Reading DNA profile and recent books, recommend 10 books they haven't read yet.
+  const prompt = `Based on this reader's Reading DNA profile, recommend 10 NEW books they haven't read yet.
 
 Reading DNA:
 ${JSON.stringify(readingDNA, null, 2)}
 
-Recent books they've read:
+Recent books they've read (for context):
 ${JSON.stringify(recentBooks, null, 2)}
+
+CRITICAL: They have read ${allReadBooks.length} books total. Here is the COMPLETE list of ALL books they've already read - DO NOT recommend ANY of these:
+${JSON.stringify(allReadBooks, null, 2)}
+
+Your recommendations MUST be books NOT on this list. Double-check each recommendation against the complete list above.
 
 IMPORTANT: Include variety! The 10 recommendations should span different genres to prevent typecasting:
 - Include at least 3-4 different genres
@@ -114,7 +130,11 @@ Format as JSON array:
       }]
     });
 
-    const jsonText = response.content[0].text;
+    let jsonText = response.content[0].text;
+
+    // Clean up markdown code blocks if present
+    jsonText = jsonText.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
+
     const result = JSON.parse(jsonText);
     return result.recommendations || result;
   } catch (error) {
@@ -161,7 +181,11 @@ Format as JSON:
       }]
     });
 
-    const jsonText = response.content[0].text;
+    let jsonText = response.content[0].text;
+
+    // Clean up markdown code blocks if present
+    jsonText = jsonText.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
+
     return JSON.parse(jsonText);
   } catch (error) {
     console.error('Error evaluating book:', error);
@@ -214,7 +238,11 @@ Format as JSON:
       }]
     });
 
-    const jsonText = response.content[0].text;
+    let jsonText = response.content[0].text;
+
+    // Clean up markdown code blocks if present
+    jsonText = jsonText.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
+
     return JSON.parse(jsonText);
   } catch (error) {
     console.error('Error generating book connections:', error);

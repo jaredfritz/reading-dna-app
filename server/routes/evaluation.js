@@ -17,20 +17,31 @@ router.post('/evaluate', async (req, res) => {
       return res.status(400).json({ error: 'User ID and book title are required' });
     }
 
-    // Load user's books
-    const booksPath = path.join(__dirname, '../../data', `${userId}_books.json`);
+    // Try preloaded data first, then fall back to user-specific files
+    let booksPath = path.join(__dirname, '../../data', 'preloaded-books.json');
+    let dnaPath = path.join(__dirname, '../../data', 'preloaded-reading-dna.json');
+
+    // If preloaded doesn't exist, try user-specific files
+    if (!fs.existsSync(booksPath)) {
+      booksPath = path.join(__dirname, '../../data', `${userId}_books.json`);
+    }
+    if (!fs.existsSync(dnaPath)) {
+      dnaPath = path.join(__dirname, '../../data', `${userId}_dna.json`);
+    }
+
     if (!fs.existsSync(booksPath)) {
       return res.status(404).json({ error: 'User data not found' });
     }
 
-    // Load Reading DNA
-    const dnaPath = path.join(__dirname, '../../data', `${userId}_dna.json`);
     if (!fs.existsSync(dnaPath)) {
       return res.status(404).json({ error: 'Reading DNA not found. Please generate it first.' });
     }
 
-    const books = JSON.parse(fs.readFileSync(booksPath, 'utf8'));
+    const booksData = JSON.parse(fs.readFileSync(booksPath, 'utf8'));
     const readingDNA = JSON.parse(fs.readFileSync(dnaPath, 'utf8'));
+
+    // Handle preloaded format (has userId and books array) vs old format (just array)
+    const books = booksData.books || booksData;
 
     // Evaluate the book
     const evaluation = await evaluateBook(bookTitle, bookAuthor || 'Unknown Author', readingDNA, books);

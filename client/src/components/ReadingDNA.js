@@ -3,7 +3,7 @@ import axios from 'axios';
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
 import './ReadingDNA.css';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001/api';
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8', '#82CA9D', '#FFC658', '#8DD1E1'];
 
 function ReadingDNA({ userId, onDNAGenerated, existingDNA }) {
@@ -12,7 +12,9 @@ function ReadingDNA({ userId, onDNAGenerated, existingDNA }) {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    if (!existingDNA) {
+    if (existingDNA) {
+      setDna(existingDNA);
+    } else if (!existingDNA) {
       checkExistingDNA();
     }
   }, [userId, existingDNA]);

@@ -5,9 +5,15 @@ client/node_modules/
 # Environment variables
 .env
 
-# Data files
-data/*.json
-data/*.csv
+# Data files (exclude user-specific data but keep preloaded)
+data/*_books.json
+data/*_dna.json
+data/*_recommendations.json
+data/*_connections.json
+data/goodreads_library_export.csv
+
+# Keep preloaded data for deployment
+!data/preloaded-*.json
 
 # Build files
 client/build/

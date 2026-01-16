@@ -1,0 +1,401 @@
+{
+  "nodes": [
+    {
+      "id": "We All Live Here",
+      "author": "Jojo Moyes",
+      "group": "Family Drama"
+    },
+    {
+      "id": "Between Two Kingdoms: A Memoir of a Life Interrupted",
+      "author": "Suleika Jaouad",
+      "group": "Memoir"
+    },
+    {
+      "id": "These Summer Storms",
+      "author": "Sarah MacLean",
+      "group": "Romance"
+    },
+    {
+      "id": "Greenlights",
+      "author": "Matthew McConaughey",
+      "group": "Memoir"
+    },
+    {
+      "id": "The Very Secret Society of Irregular Witches",
+      "author": "Sangu Mandanna",
+      "group": "Fantasy Romance"
+    },
+    {
+      "id": "A Prayer for the Crown-Shy (Monk & Robot, #2)",
+      "author": "Becky Chambers",
+      "group": "Science Fiction"
+    },
+    {
+      "id": "A Psalm for the Wild-Built (Monk & Robot, #1)",
+      "author": "Becky Chambers",
+      "group": "Science Fiction"
+    },
+    {
+      "id": "Garlic and Sapphires: The Secret Life of a Critic in Disguise",
+      "author": "Ruth Reichl",
+      "group": "Food Memoir"
+    },
+    {
+      "id": "The Heartbreak Hotel",
+      "author": "Ellen O'Clover",
+      "group": "Romance"
+    },
+    {
+      "id": "The Night We Lost Him",
+      "author": "Laura Dave",
+      "group": "Family Drama"
+    },
+    {
+      "id": "Heart the Lover",
+      "author": "Lily King",
+      "group": "Literary Fiction"
+    },
+    {
+      "id": "The Correspondent",
+      "author": "Virginia Evans",
+      "group": "Literary Fiction"
+    },
+    {
+      "id": "Back After This",
+      "author": "Linda Holmes",
+      "group": "Contemporary Romance"
+    },
+    {
+      "id": "Broken Country",
+      "author": "Clare Leslie Hall",
+      "group": "Literary Fiction"
+    },
+    {
+      "id": "A Witch's Guide to Magical Innkeeping",
+      "author": "Sangu Mandanna",
+      "group": "Fantasy Romance"
+    },
+    {
+      "id": "Funny Story",
+      "author": "Emily Henry",
+      "group": "Contemporary Romance"
+    },
+    {
+      "id": "Save Me the Plums: My Gourmet Memoir",
+      "author": "Ruth Reichl",
+      "group": "Food Memoir"
+    },
+    {
+      "id": "One Golden Summer",
+      "author": "Carley Fortune",
+      "group": "Contemporary Romance"
+    },
+    {
+      "id": "Heartwood",
+      "author": "Amity Gaige",
+      "group": "Literary Fiction"
+    },
+    {
+      "id": "Beach Read",
+      "author": "Emily Henry",
+      "group": "Contemporary Romance"
+    },
+    {
+      "id": "Carrie Soto Is Back",
+      "author": "Taylor Jenkins Reid",
+      "group": "Literary Fiction"
+    },
+    {
+      "id": "The Love Haters",
+      "author": "Katherine Center",
+      "group": "Contemporary Romance"
+    },
+    {
+      "id": "Maine Characters",
+      "author": "Hannah Orenstein",
+      "group": "Contemporary Romance"
+    },
+    {
+      "id": "Summer Romance",
+      "author": "Annabel Monaghan",
+      "group": "Contemporary Romance"
+    },
+    {
+      "id": "It's a Love Story",
+      "author": "Annabel Monaghan",
+      "group": "Contemporary Romance"
+    },
+    {
+      "id": "The Favorites",
+      "author": "Layne Fargo",
+      "group": "Thriller"
+    },
+    {
+      "id": "Daisy Jones & The Six",
+      "author": "Taylor Jenkins Reid",
+      "group": "Literary Fiction"
+    },
+    {
+      "id": "Flying Solo",
+      "author": "Linda Holmes",
+      "group": "Contemporary Romance"
+    },
+    {
+      "id": "The Rom-Commers",
+      "author": "Katherine Center",
+      "group": "Contemporary Romance"
+    },
+    {
+      "id": "The Bright Side of Disaster",
+      "author": "Katherine Center",
+      "group": "Contemporary Romance"
+    },
+    {
+      "id": "Vera Wong's Guide to Snooping [On a Dead Man] (Vera Wong, #2)",
+      "author": "Jesse Q. Sutanto",
+      "group": "Mystery Comedy"
+    },
+    {
+      "id": "Atmosphere",
+      "author": "Taylor Jenkins Reid",
+      "group": "Literary Fiction"
+    },
+    {
+      "id": "Evvie Drake Starts Over",
+      "author": "Linda Holmes",
+      "group": "Contemporary Romance"
+    },
+    {
+      "id": "Great Big Beautiful Life",
+      "author": "Emily Henry",
+      "group": "Contemporary Romance"
+    },
+    {
+      "id": "My Friends",
+      "author": "Fredrik Backman",
+      "group": "Literary Fiction"
+    },
+    {
+      "id": "Kiss the Girl (Meant to Be, #3)",
+      "author": "Zoraida Córdova",
+      "group": "Romance"
+    },
+    {
+      "id": "Promise Me Sunshine",
+      "author": "Cara Bastone",
+      "group": "Contemporary Romance"
+    },
+    {
+      "id": "The Good, the Bad, and the Aunties (Aunties, #3)",
+      "author": "Jesse Q. Sutanto",
+      "group": "Mystery Comedy"
+    },
+    {
+      "id": "Say You'll Remember Me (Say You'll Remember Me, #1)",
+      "author": "Abby Jimenez",
+      "group": "Contemporary Romance"
+    },
+    {
+      "id": "The Three Lives of Cate Kay",
+      "author": "Kate Fagan",
+      "group": "Literary Fiction"
+    },
+    {
+      "id": "Finlay Donovan Digs Her Own Grave (Finlay Donovan, #5)",
+      "author": "Elle Cosimano",
+      "group": "Mystery Comedy"
+    },
+    {
+      "id": "Things You Save in a Fire",
+      "author": "Katherine Center",
+      "group": "Contemporary Romance"
+    },
+    {
+      "id": "How to Walk Away",
+      "author": "Katherine Center",
+      "group": "Contemporary Romance"
+    },
+    {
+      "id": "The Bodyguard",
+      "author": "Katherine Center",
+      "group": "Contemporary Romance"
+    },
+    {
+      "id": "Dial A for Aunties (Aunties, #1)",
+      "author": "Jesse Q. Sutanto",
+      "group": "Mystery Comedy"
+    },
+    {
+      "id": "China Rich Girlfriend (Crazy Rich Asians, #2)",
+      "author": "Kevin Kwan",
+      "group": "Literary Fiction"
+    },
+    {
+      "id": "Crazy Rich Asians (Crazy Rich Asians, #1)",
+      "author": "Kevin Kwan",
+      "group": "Literary Fiction"
+    },
+    {
+      "id": "Four Aunties and a Wedding (Aunties, #2)",
+      "author": "Jesse Q. Sutanto",
+      "group": "Mystery Comedy"
+    },
+    {
+      "id": "Just My Type",
+      "author": "Falon Ballard",
+      "group": "Contemporary Romance"
+    },
+    {
+      "id": "The Scent Keeper",
+      "author": "Erica Bauermeister",
+      "group": "Literary Fiction"
+    }
+  ],
+  "links": [
+    {
+      "source": "A Prayer for the Crown-Shy (Monk & Robot, #2)",
+      "target": "A Psalm for the Wild-Built (Monk & Robot, #1)",
+      "reason": "Direct sequel in same series by same author"
+    },
+    {
+      "source": "The Very Secret Society of Irregular Witches",
+      "target": "A Witch's Guide to Magical Innkeeping",
+      "reason": "Both by Sangu Mandanna, cozy fantasy with magical elements"
+    },
+    {
+      "source": "Garlic and Sapphires: The Secret Life of a Critic in Disguise",
+      "target": "Save Me the Plums: My Gourmet Memoir",
+      "reason": "Both food memoirs by Ruth Reichl about culinary experiences"
+    },
+    {
+      "source": "Funny Story",
+      "target": "Beach Read",
+      "reason": "Both by Emily Henry, contemporary romance with humor"
+    },
+    {
+      "source": "Beach Read",
+      "target": "Great Big Beautiful Life",
+      "reason": "Both by Emily Henry, contemporary romance"
+    },
+    {
+      "source": "Carrie Soto Is Back",
+      "target": "Daisy Jones & The Six",
+      "reason": "Both by Taylor Jenkins Reid, character-driven literary fiction"
+    },
+    {
+      "source": "Daisy Jones & The Six",
+      "target": "Atmosphere",
+      "reason": "Both by Taylor Jenkins Reid, literary fiction"
+    },
+    {
+      "source": "The Love Haters",
+      "target": "The Rom-Commers",
+      "reason": "Both by Katherine Center, contemporary romance"
+    },
+    {
+      "source": "The Rom-Commers",
+      "target": "The Bright Side of Disaster",
+      "reason": "Both by Katherine Center, contemporary romance"
+    },
+    {
+      "source": "The Bright Side of Disaster",
+      "target": "Things You Save in a Fire",
+      "reason": "Both by Katherine Center, contemporary romance"
+    },
+    {
+      "source": "Things You Save in a Fire",
+      "target": "How to Walk Away",
+      "reason": "Both by Katherine Center, contemporary romance"
+    },
+    {
+      "source": "How to Walk Away",
+      "target": "The Bodyguard",
+      "reason": "Both by Katherine Center, contemporary romance"
+    },
+    {
+      "source": "Summer Romance",
+      "target": "It's a Love Story",
+      "reason": "Both by Annabel Monaghan, contemporary romance"
+    },
+    {
+      "source": "Back After This",
+      "target": "Flying Solo",
+      "reason": "Both by Linda Holmes, contemporary romance"
+    },
+    {
+      "source": "Flying Solo",
+      "target": "Evvie Drake Starts Over",
+      "reason": "Both by Linda Holmes, contemporary romance"
+    },
+    {
+      "source": "Dial A for Aunties (Aunties, #1)",
+      "target": "Four Aunties and a Wedding (Aunties, #2)",
+      "reason": "Direct sequel in Aunties series by Jesse Q. Sutanto"
+    },
+    {
+      "source": "Four Aunties and a Wedding (Aunties, #2)",
+      "target": "The Good, the Bad, and the Aunties (Aunties, #3)",
+      "reason": "Direct sequel in Aunties series by Jesse Q. Sutanto"
+    },
+    {
+      "source": "Crazy Rich Asians (Crazy Rich Asians, #1)",
+      "target": "China Rich Girlfriend (Crazy Rich Asians, #2)",
+      "reason": "Direct sequel in same series by Kevin Kwan"
+    },
+    {
+      "source": "Between Two Kingdoms: A Memoir of a Life Interrupted",
+      "target": "Greenlights",
+      "reason": "Both memoirs about life transformation and personal growth"
+    },
+    {
+      "source": "One Golden Summer",
+      "target": "These Summer Storms",
+      "reason": "Both summer-themed romance novels"
+    },
+    {
+      "source": "The Heartbreak Hotel",
+      "target": "Promise Me Sunshine",
+      "reason": "Both contemporary romance with emotional healing themes"
+    },
+    {
+      "source": "We All Live Here",
+      "target": "The Night We Lost Him",
+      "reason": "Both family dramas exploring complex relationships"
+    },
+    {
+      "source": "Vera Wong's Guide to Snooping [On a Dead Man] (Vera Wong, #2)",
+      "target": "Finlay Donovan Digs Her Own Grave (Finlay Donovan, #5)",
+      "reason": "Both mystery comedies with amateur sleuths"
+    },
+    {
+      "source": "Heart the Lover",
+      "target": "Heartwood",
+      "reason": "Both literary fiction exploring relationships and human connections"
+    },
+    {
+      "source": "My Friends",
+      "target": "The Three Lives of Cate Kay",
+      "reason": "Both literary fiction exploring friendship and identity"
+    },
+    {
+      "source": "Funny Story",
+      "target": "One Golden Summer",
+      "reason": "Both contemporary romance with summer settings"
+    },
+    {
+      "source": "Beach Read",
+      "target": "Summer Romance",
+      "reason": "Both summer-themed contemporary romance"
+    },
+    {
+      "source": "Maine Characters",
+      "target": "Just My Type",
+      "reason": "Both contemporary romance with character-driven plots"
+    },
+    {
+      "source": "The Scent Keeper",
+      "target": "Heartwood",
+      "reason": "Both literary fiction with nature and sensory themes"
+    }
+  ]
+}

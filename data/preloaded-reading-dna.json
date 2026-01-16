@@ -1,0 +1,45 @@
+{
+  "coreIdentity": "A contemporary fiction enthusiast with a strong appetite for feel-good narratives, particularly drawn to romance, women's fiction, and uplifting stories that explore human connection. This reader consistently gravitates toward accessible, emotionally engaging books that offer comfort and hope rather than challenging or dark themes.",
+  "genreDistribution": [
+    {
+      "genre": "Contemporary Romance",
+      "percentage": 35
+    },
+    {
+      "genre": "Women's Fiction",
+      "percentage": 25
+    },
+    {
+      "genre": "Literary Fiction",
+      "percentage": 15
+    },
+    {
+      "genre": "Memoir/Biography",
+      "percentage": 10
+    },
+    {
+      "genre": "Fantasy/Speculative Fiction",
+      "percentage": 8
+    },
+    {
+      "genre": "Mystery/Thriller",
+      "percentage": 4
+    },
+    {
+      "genre": "Non-fiction",
+      "percentage": 3
+    }
+  ],
+  "pacingPreference": "Medium-paced character-driven narratives that balance emotional depth with engaging plot progression, favoring accessible writing styles over dense literary prose",
+  "themesAndPatterns": [
+    "Second chances and new beginnings",
+    "Family dynamics and relationships",
+    "Strong female protagonists overcoming adversity",
+    "Community and belonging",
+    "Love stories with emotional depth",
+    "Personal growth and self-discovery",
+    "Cozy, comforting settings"
+  ],
+  "readingEvolution": "Shows remarkable consistency in taste over time, with a steady preference for uplifting contemporary fiction. Recent years show increased exploration of diverse authors and cultural perspectives, while maintaining core preference for emotionally satisfying narratives.",
+  "uniqueFingerprint": "This reader has developed distinct author loyalties, particularly to Emily Henry, Katherine Center, and Taylor Jenkins Reid, suggesting they value reliable emotional payoffs and distinctive narrative voices. Their reading pattern reveals someone who uses books as emotional comfort food, consistently choosing stories that restore faith in humanity and relationships."
+}

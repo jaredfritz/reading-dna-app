@@ -3,7 +3,7 @@ import axios from 'axios';
 import ForceGraph2D from 'react-force-graph-2d';
 import './BookConnections.css';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001/api';
 
 function BookConnections({ userId, onConnectionsGenerated, existingConnections }) {
   const [connections, setConnections] = useState(existingConnections);
@@ -12,7 +12,9 @@ function BookConnections({ userId, onConnectionsGenerated, existingConnections }
   const [selectedNode, setSelectedNode] = useState(null);
 
   useEffect(() => {
-    if (!existingConnections) {
+    if (existingConnections) {
+      setConnections(existingConnections);
+    } else if (!existingConnections) {
       checkExistingConnections();
     }
   }, [userId, existingConnections]);

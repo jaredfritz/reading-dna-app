@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './App.css';
 import FileUpload from './components/FileUpload';
 import ReadingDNA from './components/ReadingDNA';
@@ -6,12 +7,39 @@ import BookConnections from './components/BookConnections';
 import Recommendations from './components/Recommendations';
 import BookEvaluator from './components/BookEvaluator';
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001/api';
+
 function App() {
-  const [userId, setUserId] = useState(null);
-  const [activeTab, setActiveTab] = useState('upload');
+  const [userId, setUserId] = useState('default-user');
+  const [activeTab, setActiveTab] = useState('dna');
   const [readingDNA, setReadingDNA] = useState(null);
   const [connections, setConnections] = useState(null);
   const [recommendations, setRecommendations] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  // Load pre-generated data on app startup
+  useEffect(() => {
+    const loadPreloadedData = async () => {
+      try {
+        setLoading(true);
+
+        // Load Reading DNA
+        const dnaResponse = await axios.get(`${API_URL}/preloaded/reading-dna`);
+        setReadingDNA(dnaResponse.data);
+
+        // Load Book Connections
+        const connectionsResponse = await axios.get(`${API_URL}/preloaded/book-connections`);
+        setConnections(connectionsResponse.data);
+
+        setLoading(false);
+      } catch (error) {
+        console.error('Error loading preloaded data:', error);
+        setLoading(false);
+      }
+    };
+
+    loadPreloadedData();
+  }, []);
 
   const handleUploadSuccess = (newUserId) => {
     setUserId(newUserId);
@@ -75,10 +103,17 @@ function App() {
       </nav>
 
       <main className="main-content">
-        {activeTab === 'upload' && (
-          <FileUpload onUploadSuccess={handleUploadSuccess} />
-        )}
-        {activeTab === 'dna' && userId && (
+        {loading ? (
+          <div className="loading-state">
+            <h2>Loading your Reading DNA...</h2>
+            <p>Just a moment while we prepare your personalized reading profile.</p>
+          </div>
+        ) : (
+          <>
+            {activeTab === 'upload' && (
+              <FileUpload onUploadSuccess={handleUploadSuccess} />
+            )}
+            {activeTab === 'dna' && userId && (
           <ReadingDNA
             userId={userId}
             onDNAGenerated={handleDNAGenerated}
@@ -102,10 +137,12 @@ function App() {
         {activeTab === 'evaluate' && userId && readingDNA && (
           <BookEvaluator userId={userId} />
         )}
+          </>
+        )}
       </main>
 
       <footer className="App-footer">
-        <p>Built with React, Node.js, and OpenAI</p>
+        <p>Built with React, Node.js, and Anthropic Claude</p>
       </footer>
     </div>
   );

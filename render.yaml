@@ -1,0 +1,14 @@
+services:
+  # Backend API
+  - type: web
+    name: reading-dna-api
+    env: node
+    buildCommand: npm install
+    startCommand: node server/index.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: ANTHROPIC_API_KEY
+        sync: false # This will be set manually in Render dashboard
