@@ -61,7 +61,7 @@ function Recommendations({ userId, onRecommendationsGenerated, existingRecommend
         <h2>Suggested Reads</h2>
         <p>Get personalized book recommendations based on your Reading DNA.</p>
         <p className="diversity-note">
-          We'll recommend 10 books across different genres to help you explore beyond your usual preferences!
+          We'll recommend 9 books across different genres to help you explore beyond your usual preferences!
         </p>
         <button onClick={generateRecommendations} className="generate-button">
           Get Recommendations

@@ -19,18 +19,18 @@ async function generateReadingDNA(books) {
     dateRead: book['Date Read'] || book.dateRead,
   }));
 
-  const prompt = `Analyze this reader's book history and create a "Reading DNA" profile. The profile should be insightful, personalized, and reveal patterns in their reading preferences.
+  const prompt = `Analyze this reader's book history and create a "Reading DNA" profile. The profile should be insightful, personalized, and reveal patterns in their reading preferences. Write directly to the reader using "you" and "your".
 
 Books read (up to 100 most recent):
 ${JSON.stringify(bookSummary, null, 2)}
 
 Create a Reading DNA profile with these sections:
-1. **Core Reading Identity** (2-3 sentences): What defines this reader?
+1. **Core Reading Identity** (2-3 sentences): What defines you as a reader? Address them directly.
 2. **Genre Distribution**: Break down their genre preferences with percentages
-3. **Pacing Preference**: Do they prefer slow literary fiction, fast-paced thrillers, or a mix?
-4. **Themes & Patterns**: What recurring themes, character types, or plot elements do they gravitate toward?
-5. **Reading Evolution**: How has their taste changed over time (if data shows this)?
-6. **Unique Fingerprint**: What makes this reader's taste unique or interesting?
+3. **Pacing Preference**: What pacing do you prefer - slow literary fiction, fast-paced thrillers, or a mix?
+4. **Themes & Patterns**: What recurring themes, character types, or plot elements do you gravitate toward?
+5. **Reading Evolution**: How has your taste changed over time (if data shows this)?
+6. **Unique Fingerprint**: What makes your taste unique or interesting?
 
 Format as JSON with this structure:
 {
@@ -85,7 +85,7 @@ async function generateRecommendations(books, readingDNA) {
     author: book['Author'] || book.author,
   }));
 
-  const prompt = `Based on this reader's Reading DNA profile, recommend 10 NEW books they haven't read yet.
+  const prompt = `Based on this reader's Reading DNA profile, recommend 9 NEW books they haven't read yet.
 
 Reading DNA:
 ${JSON.stringify(readingDNA, null, 2)}
@@ -98,7 +98,7 @@ ${JSON.stringify(allReadBooks, null, 2)}
 
 Your recommendations MUST be books NOT on this list. Double-check each recommendation against the complete list above.
 
-IMPORTANT: Include variety! The 10 recommendations should span different genres to prevent typecasting:
+IMPORTANT: Include variety! The 9 recommendations should span different genres to prevent typecasting:
 - Include at least 3-4 different genres
 - Mix popular and lesser-known titles
 - Include different time periods (classic and contemporary)
@@ -152,12 +152,12 @@ async function evaluateBook(bookTitle, bookAuthor, readingDNA, userBooks) {
 Their Reading DNA profile:
 ${JSON.stringify(readingDNA, null, 2)}
 
-Provide feedback on whether this book would be a good fit for them. Include:
-1. **Match Score** (1-10): How well does this book align with their Reading DNA?
-2. **Why It Fits**: Specific reasons this might appeal to them
-3. **Potential Concerns**: Any aspects that might not align with their preferences
+Provide feedback on whether this book would be a good fit for them. Address them directly using "you" and "your". Include:
+1. **Match Score** (1-10): How well does this book align with your Reading DNA?
+2. **Why It Fits**: Specific reasons this might appeal to you
+3. **Potential Concerns**: Any aspects that might not align with your preferences
 4. **Content Warnings**: List potential triggers WITHOUT spoilers (violence, sexual content, death, mental health themes, etc.) - be specific but vague enough to avoid spoilers
-5. **Similar Books They Might Prefer**: 2-3 alternatives if this isn't a perfect match
+5. **Similar Books You Might Prefer**: 2-3 alternatives if this isn't a perfect match
 
 CRITICAL: Do not spoil plot points, twists, or endings. Keep all descriptions spoiler-free.
 
