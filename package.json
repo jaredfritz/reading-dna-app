@@ -1,7 +1,7 @@
 {
-  "name": "reading-dna-app",
+  "name": "readr",
   "version": "1.0.0",
-  "description": "A personalized book tracking app with Reading DNA and intelligent recommendations",
+  "description": "Your reading fingerprint - personalized book tracking and intelligent recommendations",
   "main": "server/index.js",
   "scripts": {
     "start": "node server/index.js",

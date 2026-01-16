@@ -61,8 +61,8 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>📚 Reading DNA</h1>
-        <p>Discover your unique reading fingerprint</p>
+        <h1>Readr</h1>
+        <p>Your reading fingerprint</p>
       </header>
 
       <nav className="nav-tabs">
@@ -77,36 +77,36 @@ function App() {
           onClick={() => setActiveTab('dna')}
           disabled={!userId}
         >
-          Reading DNA
+          Profile
         </button>
         <button
           className={activeTab === 'connections' ? 'active' : ''}
           onClick={() => setActiveTab('connections')}
           disabled={!userId}
         >
-          Book Connections
+          Connections
         </button>
         <button
           className={activeTab === 'recommendations' ? 'active' : ''}
           onClick={() => setActiveTab('recommendations')}
           disabled={!userId || !readingDNA}
         >
-          Suggested Reads
+          Discover
         </button>
         <button
           className={activeTab === 'evaluate' ? 'active' : ''}
           onClick={() => setActiveTab('evaluate')}
           disabled={!userId || !readingDNA}
         >
-          Evaluate a Book
+          Evaluate
         </button>
       </nav>
 
       <main className="main-content">
         {loading ? (
           <div className="loading-state">
-            <h2>Loading your Reading DNA...</h2>
-            <p>Just a moment while we prepare your personalized reading profile.</p>
+            <h2>Loading your profile...</h2>
+            <p>Preparing your personalized reading insights.</p>
           </div>
         ) : (
           <>
@@ -142,7 +142,7 @@ function App() {
       </main>
 
       <footer className="App-footer">
-        <p>Built with React, Node.js, and Anthropic Claude</p>
+        <p>Powered by Claude AI</p>
       </footer>
     </div>
   );
