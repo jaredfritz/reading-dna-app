@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import './BookEvaluator.css';
 
@@ -10,6 +10,76 @@ function BookEvaluator({ userId }) {
   const [evaluation, setEvaluation] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [suggestions, setSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+  const suggestionsRef = useRef(null);
+  const inputRef = useRef(null);
+
+  // Search for book suggestions
+  useEffect(() => {
+    const searchBooks = async () => {
+      if (bookTitle.length < 2) {
+        setSuggestions([]);
+        setShowSuggestions(false);
+        return;
+      }
+
+      try {
+        const response = await axios.get(`${API_URL}/preloaded/search?q=${encodeURIComponent(bookTitle)}`);
+        setSuggestions(response.data);
+        setShowSuggestions(response.data.length > 0);
+      } catch (err) {
+        console.error('Failed to search books:', err);
+      }
+    };
+
+    const debounce = setTimeout(searchBooks, 300);
+    return () => clearTimeout(debounce);
+  }, [bookTitle]);
+
+  // Close suggestions when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (suggestionsRef.current && !suggestionsRef.current.contains(event.target) &&
+          inputRef.current && !inputRef.current.contains(event.target)) {
+        setShowSuggestions(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const handleTitleChange = (e) => {
+    setBookTitle(e.target.value);
+    setSelectedIndex(-1);
+  };
+
+  const handleSelectSuggestion = (suggestion) => {
+    setBookTitle(suggestion.title);
+    setBookAuthor(suggestion.author || '');
+    setShowSuggestions(false);
+    setSelectedIndex(-1);
+  };
+
+  const handleKeyDown = (e) => {
+    if (!showSuggestions || suggestions.length === 0) return;
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setSelectedIndex(prev => (prev < suggestions.length - 1 ? prev + 1 : prev));
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setSelectedIndex(prev => (prev > 0 ? prev - 1 : -1));
+    } else if (e.key === 'Enter' && selectedIndex >= 0) {
+      e.preventDefault();
+      handleSelectSuggestion(suggestions[selectedIndex]);
+    } else if (e.key === 'Escape') {
+      setShowSuggestions(false);
+      setSelectedIndex(-1);
+    }
+  };
 
   const handleEvaluate = async (e) => {
     e.preventDefault();
@@ -22,6 +92,7 @@ function BookEvaluator({ userId }) {
     setLoading(true);
     setError('');
     setEvaluation(null);
+    setShowSuggestions(false);
 
     try {
       const response = await axios.post(`${API_URL}/evaluation/evaluate`, {
@@ -50,16 +121,34 @@ function BookEvaluator({ userId }) {
       <p className="subtitle">Considering a new book? See if it matches your Reading DNA</p>
 
       <form onSubmit={handleEvaluate} className="evaluation-form">
-        <div className="form-group">
+        <div className="form-group autocomplete-wrapper">
           <label htmlFor="bookTitle">Book Title *</label>
           <input
+            ref={inputRef}
             type="text"
             id="bookTitle"
             value={bookTitle}
-            onChange={(e) => setBookTitle(e.target.value)}
-            placeholder="Enter the book title"
+            onChange={handleTitleChange}
+            onKeyDown={handleKeyDown}
+            placeholder="Start typing a book title..."
             required
+            autoComplete="off"
           />
+          {showSuggestions && suggestions.length > 0 && (
+            <div ref={suggestionsRef} className="suggestions-dropdown">
+              {suggestions.map((suggestion, index) => (
+                <div
+                  key={index}
+                  className={`suggestion-item ${index === selectedIndex ? 'selected' : ''}`}
+                  onClick={() => handleSelectSuggestion(suggestion)}
+                  onMouseEnter={() => setSelectedIndex(index)}
+                >
+                  <div className="suggestion-title">{suggestion.title}</div>
+                  <div className="suggestion-author">by {suggestion.author}</div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         <div className="form-group">
@@ -69,7 +158,7 @@ function BookEvaluator({ userId }) {
             id="bookAuthor"
             value={bookAuthor}
             onChange={(e) => setBookAuthor(e.target.value)}
-            placeholder="Enter the author's name"
+            placeholder="Author (auto-filled from selection)"
           />
         </div>
 

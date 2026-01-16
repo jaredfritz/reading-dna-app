@@ -60,4 +60,42 @@ router.get('/book-connections', (req, res) => {
   }
 });
 
+/**
+ * Search books by title (for autocomplete)
+ */
+router.get('/search', (req, res) => {
+  try {
+    const query = req.query.q?.toLowerCase() || '';
+
+    if (!query || query.length < 2) {
+      return res.json([]);
+    }
+
+    const filePath = path.join(__dirname, '../../data/preloaded-books.json');
+
+    if (!fs.existsSync(filePath)) {
+      return res.status(404).json({ error: 'Preloaded books data not found' });
+    }
+
+    const books = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+
+    // Search for matching titles
+    const matches = books
+      .filter(book => {
+        const title = (book.Title || book.title || '').toLowerCase();
+        return title.includes(query);
+      })
+      .slice(0, 10) // Limit to 10 results
+      .map(book => ({
+        title: book.Title || book.title,
+        author: book.Author || book.author
+      }));
+
+    res.json(matches);
+  } catch (error) {
+    console.error('Error searching books:', error);
+    res.status(500).json({ error: 'Failed to search books' });
+  }
+});
+
 module.exports = router;
