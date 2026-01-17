@@ -77,7 +77,8 @@ router.get('/search', (req, res) => {
       return res.status(404).json({ error: 'Preloaded books data not found' });
     }
 
-    const books = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+    const data = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+    const books = data.books || data; // Handle both wrapped and unwrapped formats
 
     // Search for matching titles
     const matches = books
