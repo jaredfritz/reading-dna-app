@@ -9,8 +9,18 @@ function Recommendations({ userId, onRecommendationsGenerated, existingRecommend
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
+  // Load from localStorage on mount
   useEffect(() => {
-    if (!existingRecommendations) {
+    const cachedRecs = localStorage.getItem('readr_recommendations');
+    if (cachedRecs) {
+      try {
+        const parsed = JSON.parse(cachedRecs);
+        setRecommendations(parsed);
+        onRecommendationsGenerated(parsed);
+      } catch (err) {
+        console.error('Failed to parse cached recommendations:', err);
+      }
+    } else if (!existingRecommendations) {
       checkExistingRecommendations();
     }
   }, [userId, existingRecommendations]);
@@ -23,6 +33,8 @@ function Recommendations({ userId, onRecommendationsGenerated, existingRecommend
         : response.data.recommendations.recommendations || [];
       setRecommendations(recs);
       onRecommendationsGenerated(recs);
+      // Cache in localStorage
+      localStorage.setItem('readr_recommendations', JSON.stringify(recs));
     } catch (err) {
       // Recommendations don't exist yet, that's ok
     }
@@ -39,6 +51,8 @@ function Recommendations({ userId, onRecommendationsGenerated, existingRecommend
         : response.data.recommendations.recommendations || [];
       setRecommendations(recs);
       onRecommendationsGenerated(recs);
+      // Cache in localStorage
+      localStorage.setItem('readr_recommendations', JSON.stringify(recs));
     } catch (err) {
       setError(err.response?.data?.error || 'Failed to generate recommendations');
     } finally {

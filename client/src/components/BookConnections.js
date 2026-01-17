@@ -11,8 +11,18 @@ function BookConnections({ userId, onConnectionsGenerated, existingConnections }
   const [error, setError] = useState('');
   const [selectedNode, setSelectedNode] = useState(null);
 
+  // Load from localStorage on mount
   useEffect(() => {
-    if (existingConnections) {
+    const cachedConnections = localStorage.getItem('readr_connections');
+    if (cachedConnections) {
+      try {
+        const parsed = JSON.parse(cachedConnections);
+        setConnections(parsed);
+        onConnectionsGenerated(parsed);
+      } catch (err) {
+        console.error('Failed to parse cached connections:', err);
+      }
+    } else if (existingConnections) {
       setConnections(existingConnections);
     } else if (!existingConnections) {
       checkExistingConnections();
@@ -24,6 +34,8 @@ function BookConnections({ userId, onConnectionsGenerated, existingConnections }
       const response = await axios.get(`${API_URL}/analysis/book-connections/${userId}`);
       setConnections(response.data.connections);
       onConnectionsGenerated(response.data.connections);
+      // Cache in localStorage
+      localStorage.setItem('readr_connections', JSON.stringify(response.data.connections));
     } catch (err) {
       // Connections don't exist yet, that's ok
     }
@@ -37,6 +49,8 @@ function BookConnections({ userId, onConnectionsGenerated, existingConnections }
       const response = await axios.post(`${API_URL}/analysis/book-connections`, { userId });
       setConnections(response.data.connections);
       onConnectionsGenerated(response.data.connections);
+      // Cache in localStorage
+      localStorage.setItem('readr_connections', JSON.stringify(response.data.connections));
     } catch (err) {
       setError(err.response?.data?.error || 'Failed to generate book connections');
     } finally {

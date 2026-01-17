@@ -25,6 +25,21 @@ function BookEvaluator({ userId }) {
   const authorSuggestionsRef = useRef(null);
   const authorInputRef = useRef(null);
 
+  // Load last evaluation from localStorage on mount
+  useEffect(() => {
+    const cachedEval = localStorage.getItem('readr_last_evaluation');
+    if (cachedEval) {
+      try {
+        const { evaluation, title, author } = JSON.parse(cachedEval);
+        setEvaluation(evaluation);
+        setBookTitle(title);
+        setBookAuthor(author);
+      } catch (err) {
+        console.error('Failed to parse cached evaluation:', err);
+      }
+    }
+  }, []);
+
   // Search for book title suggestions
   useEffect(() => {
     const searchBooks = async () => {
@@ -177,6 +192,14 @@ function BookEvaluator({ userId }) {
       });
 
       setEvaluation(response.data.evaluation);
+
+      // Cache the evaluation in localStorage
+      localStorage.setItem('readr_last_evaluation', JSON.stringify({
+        evaluation: response.data.evaluation,
+        title: bookTitle,
+        author: bookAuthor,
+        timestamp: new Date().toISOString()
+      }));
     } catch (err) {
       setError(err.response?.data?.error || 'Failed to evaluate book');
     } finally {
