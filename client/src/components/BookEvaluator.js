@@ -10,25 +10,34 @@ function BookEvaluator({ userId }) {
   const [evaluation, setEvaluation] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [suggestions, setSuggestions] = useState([]);
-  const [showSuggestions, setShowSuggestions] = useState(false);
-  const [selectedIndex, setSelectedIndex] = useState(-1);
-  const suggestionsRef = useRef(null);
-  const inputRef = useRef(null);
 
-  // Search for book suggestions
+  // Title autocomplete state
+  const [titleSuggestions, setTitleSuggestions] = useState([]);
+  const [showTitleSuggestions, setShowTitleSuggestions] = useState(false);
+  const [titleSelectedIndex, setTitleSelectedIndex] = useState(-1);
+  const titleSuggestionsRef = useRef(null);
+  const titleInputRef = useRef(null);
+
+  // Author autocomplete state
+  const [authorSuggestions, setAuthorSuggestions] = useState([]);
+  const [showAuthorSuggestions, setShowAuthorSuggestions] = useState(false);
+  const [authorSelectedIndex, setAuthorSelectedIndex] = useState(-1);
+  const authorSuggestionsRef = useRef(null);
+  const authorInputRef = useRef(null);
+
+  // Search for book title suggestions
   useEffect(() => {
     const searchBooks = async () => {
       if (bookTitle.length < 2) {
-        setSuggestions([]);
-        setShowSuggestions(false);
+        setTitleSuggestions([]);
+        setShowTitleSuggestions(false);
         return;
       }
 
       try {
         const response = await axios.get(`${API_URL}/preloaded/search?q=${encodeURIComponent(bookTitle)}`);
-        setSuggestions(response.data);
-        setShowSuggestions(response.data.length > 0);
+        setTitleSuggestions(response.data);
+        setShowTitleSuggestions(response.data.length > 0);
       } catch (err) {
         console.error('Failed to search books:', err);
       }
@@ -38,12 +47,47 @@ function BookEvaluator({ userId }) {
     return () => clearTimeout(debounce);
   }, [bookTitle]);
 
-  // Close suggestions when clicking outside
+  // Search for author suggestions
+  useEffect(() => {
+    const searchAuthors = async () => {
+      if (bookAuthor.length < 2) {
+        setAuthorSuggestions([]);
+        setShowAuthorSuggestions(false);
+        return;
+      }
+
+      try {
+        const response = await axios.get(`${API_URL}/preloaded/search-author?q=${encodeURIComponent(bookAuthor)}`);
+        setAuthorSuggestions(response.data);
+        setShowAuthorSuggestions(response.data.length > 0);
+      } catch (err) {
+        console.error('Failed to search authors:', err);
+      }
+    };
+
+    const debounce = setTimeout(searchAuthors, 300);
+    return () => clearTimeout(debounce);
+  }, [bookAuthor]);
+
+  // Close title suggestions when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (suggestionsRef.current && !suggestionsRef.current.contains(event.target) &&
-          inputRef.current && !inputRef.current.contains(event.target)) {
-        setShowSuggestions(false);
+      if (titleSuggestionsRef.current && !titleSuggestionsRef.current.contains(event.target) &&
+          titleInputRef.current && !titleInputRef.current.contains(event.target)) {
+        setShowTitleSuggestions(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  // Close author suggestions when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (authorSuggestionsRef.current && !authorSuggestionsRef.current.contains(event.target) &&
+          authorInputRef.current && !authorInputRef.current.contains(event.target)) {
+        setShowAuthorSuggestions(false);
       }
     };
 
@@ -53,31 +97,61 @@ function BookEvaluator({ userId }) {
 
   const handleTitleChange = (e) => {
     setBookTitle(e.target.value);
-    setSelectedIndex(-1);
+    setTitleSelectedIndex(-1);
   };
 
-  const handleSelectSuggestion = (suggestion) => {
+  const handleAuthorChange = (e) => {
+    setBookAuthor(e.target.value);
+    setAuthorSelectedIndex(-1);
+  };
+
+  const handleSelectTitleSuggestion = (suggestion) => {
     setBookTitle(suggestion.title);
     setBookAuthor(suggestion.author || '');
-    setShowSuggestions(false);
-    setSelectedIndex(-1);
+    setShowTitleSuggestions(false);
+    setTitleSelectedIndex(-1);
   };
 
-  const handleKeyDown = (e) => {
-    if (!showSuggestions || suggestions.length === 0) return;
+  const handleSelectAuthorSuggestion = (suggestion) => {
+    setBookTitle(suggestion.title);
+    setBookAuthor(suggestion.author || '');
+    setShowAuthorSuggestions(false);
+    setAuthorSelectedIndex(-1);
+  };
+
+  const handleTitleKeyDown = (e) => {
+    if (!showTitleSuggestions || titleSuggestions.length === 0) return;
 
     if (e.key === 'ArrowDown') {
       e.preventDefault();
-      setSelectedIndex(prev => (prev < suggestions.length - 1 ? prev + 1 : prev));
+      setTitleSelectedIndex(prev => (prev < titleSuggestions.length - 1 ? prev + 1 : prev));
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
-      setSelectedIndex(prev => (prev > 0 ? prev - 1 : -1));
-    } else if (e.key === 'Enter' && selectedIndex >= 0) {
+      setTitleSelectedIndex(prev => (prev > 0 ? prev - 1 : -1));
+    } else if (e.key === 'Enter' && titleSelectedIndex >= 0) {
       e.preventDefault();
-      handleSelectSuggestion(suggestions[selectedIndex]);
+      handleSelectTitleSuggestion(titleSuggestions[titleSelectedIndex]);
     } else if (e.key === 'Escape') {
-      setShowSuggestions(false);
-      setSelectedIndex(-1);
+      setShowTitleSuggestions(false);
+      setTitleSelectedIndex(-1);
+    }
+  };
+
+  const handleAuthorKeyDown = (e) => {
+    if (!showAuthorSuggestions || authorSuggestions.length === 0) return;
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setAuthorSelectedIndex(prev => (prev < authorSuggestions.length - 1 ? prev + 1 : prev));
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setAuthorSelectedIndex(prev => (prev > 0 ? prev - 1 : -1));
+    } else if (e.key === 'Enter' && authorSelectedIndex >= 0) {
+      e.preventDefault();
+      handleSelectAuthorSuggestion(authorSuggestions[authorSelectedIndex]);
+    } else if (e.key === 'Escape') {
+      setShowAuthorSuggestions(false);
+      setAuthorSelectedIndex(-1);
     }
   };
 
@@ -92,7 +166,8 @@ function BookEvaluator({ userId }) {
     setLoading(true);
     setError('');
     setEvaluation(null);
-    setShowSuggestions(false);
+    setShowTitleSuggestions(false);
+    setShowAuthorSuggestions(false);
 
     try {
       const response = await axios.post(`${API_URL}/evaluation/evaluate`, {
@@ -124,24 +199,24 @@ function BookEvaluator({ userId }) {
         <div className="form-group autocomplete-wrapper">
           <label htmlFor="bookTitle">Book Title *</label>
           <input
-            ref={inputRef}
+            ref={titleInputRef}
             type="text"
             id="bookTitle"
             value={bookTitle}
             onChange={handleTitleChange}
-            onKeyDown={handleKeyDown}
+            onKeyDown={handleTitleKeyDown}
             placeholder="Start typing a book title..."
             required
             autoComplete="off"
           />
-          {showSuggestions && suggestions.length > 0 && (
-            <div ref={suggestionsRef} className="suggestions-dropdown">
-              {suggestions.map((suggestion, index) => (
+          {showTitleSuggestions && titleSuggestions.length > 0 && (
+            <div ref={titleSuggestionsRef} className="suggestions-dropdown">
+              {titleSuggestions.map((suggestion, index) => (
                 <div
                   key={index}
-                  className={`suggestion-item ${index === selectedIndex ? 'selected' : ''}`}
-                  onClick={() => handleSelectSuggestion(suggestion)}
-                  onMouseEnter={() => setSelectedIndex(index)}
+                  className={`suggestion-item ${index === titleSelectedIndex ? 'selected' : ''}`}
+                  onClick={() => handleSelectTitleSuggestion(suggestion)}
+                  onMouseEnter={() => setTitleSelectedIndex(index)}
                 >
                   <div className="suggestion-title">{suggestion.title}</div>
                   <div className="suggestion-author">by {suggestion.author}</div>
@@ -151,15 +226,33 @@ function BookEvaluator({ userId }) {
           )}
         </div>
 
-        <div className="form-group">
+        <div className="form-group autocomplete-wrapper">
           <label htmlFor="bookAuthor">Author (optional)</label>
           <input
+            ref={authorInputRef}
             type="text"
             id="bookAuthor"
             value={bookAuthor}
-            onChange={(e) => setBookAuthor(e.target.value)}
-            placeholder="Author (auto-filled from selection)"
+            onChange={handleAuthorChange}
+            onKeyDown={handleAuthorKeyDown}
+            placeholder="Start typing an author name..."
+            autoComplete="off"
           />
+          {showAuthorSuggestions && authorSuggestions.length > 0 && (
+            <div ref={authorSuggestionsRef} className="suggestions-dropdown">
+              {authorSuggestions.map((suggestion, index) => (
+                <div
+                  key={index}
+                  className={`suggestion-item ${index === authorSelectedIndex ? 'selected' : ''}`}
+                  onClick={() => handleSelectAuthorSuggestion(suggestion)}
+                  onMouseEnter={() => setAuthorSelectedIndex(index)}
+                >
+                  <div className="suggestion-title">{suggestion.title}</div>
+                  <div className="suggestion-author">by {suggestion.author}</div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         <button type="submit" disabled={loading} className="evaluate-button">

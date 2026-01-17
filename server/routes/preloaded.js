@@ -98,4 +98,42 @@ router.get('/search', async (req, res) => {
   }
 });
 
+/**
+ * Search books by author using Google Books API (for autocomplete)
+ */
+router.get('/search-author', async (req, res) => {
+  try {
+    const query = req.query.q || '';
+
+    if (!query || query.length < 2) {
+      return res.json([]);
+    }
+
+    // Use Google Books API to search by author
+    const fetch = (await import('node-fetch')).default;
+    const googleBooksUrl = `https://www.googleapis.com/books/v1/volumes?q=inauthor:${encodeURIComponent(query)}&maxResults=10&printType=books`;
+
+    const response = await fetch(googleBooksUrl);
+    const data = await response.json();
+
+    if (!data.items) {
+      return res.json([]);
+    }
+
+    // Format results to match our interface
+    const matches = data.items.map(item => {
+      const volumeInfo = item.volumeInfo;
+      return {
+        title: volumeInfo.title || 'Unknown Title',
+        author: volumeInfo.authors ? volumeInfo.authors.join(', ') : 'Unknown Author'
+      };
+    });
+
+    res.json(matches);
+  } catch (error) {
+    console.error('Error searching books by author:', error);
+    res.status(500).json({ error: 'Failed to search books by author' });
+  }
+});
+
 module.exports = router;
