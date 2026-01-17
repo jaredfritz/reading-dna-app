@@ -61,36 +61,35 @@ router.get('/book-connections', (req, res) => {
 });
 
 /**
- * Search books by title (for autocomplete)
+ * Search books by title using Google Books API (for autocomplete)
  */
-router.get('/search', (req, res) => {
+router.get('/search', async (req, res) => {
   try {
-    const query = req.query.q?.toLowerCase() || '';
+    const query = req.query.q || '';
 
     if (!query || query.length < 2) {
       return res.json([]);
     }
 
-    const filePath = path.join(__dirname, '../../data/preloaded-books.json');
+    // Use Google Books API for comprehensive book search
+    const fetch = (await import('node-fetch')).default;
+    const googleBooksUrl = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}&maxResults=10&printType=books`;
 
-    if (!fs.existsSync(filePath)) {
-      return res.status(404).json({ error: 'Preloaded books data not found' });
+    const response = await fetch(googleBooksUrl);
+    const data = await response.json();
+
+    if (!data.items) {
+      return res.json([]);
     }
 
-    const data = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
-    const books = data.books || data; // Handle both wrapped and unwrapped formats
-
-    // Search for matching titles
-    const matches = books
-      .filter(book => {
-        const title = (book.Title || book.title || '').toLowerCase();
-        return title.includes(query);
-      })
-      .slice(0, 10) // Limit to 10 results
-      .map(book => ({
-        title: book.Title || book.title,
-        author: book.Author || book.author
-      }));
+    // Format results to match our interface
+    const matches = data.items.map(item => {
+      const volumeInfo = item.volumeInfo;
+      return {
+        title: volumeInfo.title || 'Unknown Title',
+        author: volumeInfo.authors ? volumeInfo.authors.join(', ') : 'Unknown Author'
+      };
+    });
 
     res.json(matches);
   } catch (error) {
